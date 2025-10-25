@@ -2,8 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>拾光π - 您的碎片时间变现平台</title>
-    <!-- 浏览器标签页 Logo (Favicon) -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2338BDF8'/%3E%3Cpath d='M25 35H75' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M35 35V70' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M65 35V70' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E">
+    <!-- 浏览器标签页 Logo (Favicon) --><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='favGradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338BDF8'/%3E%3Cstop offset='100%25' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' stroke='url(%23favGradient)' stroke-width='6' fill='none'/%3E%3Cpath d='M28 35H72' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M35 35V70' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M65 35V70' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='45' cy='35' r='5' fill='white'/%3E%3C/svg%3E">
     
     <!-- 引入Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Google Font 'Inter' --><link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,7 +113,7 @@
             }
         }
 
-        /* 新增：为 "时间变现" 和 "企业赋能" 区域的卡片设计 */
+        /* "用户收益" 和 "企业赋能" 区域的卡片设计 */
         .info-card {
             background: linear-gradient(145deg, #1E293B, #0F172A); /* slate-800 to slate-900 渐变 */
             border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 @ 50% */
@@ -160,6 +159,34 @@
              box-shadow: 0 0 15px rgba(250, 204, 21, 0.5); /* yellow-400 glow */
         }
 
+        /* --- 合作伙伴滚动 Logo --- */
+        .logos-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll-x 40s linear infinite; /* 速度已加快：从 60s 改为 40s */
+        }
+        .logos-scroll-reverse {
+            display: flex;
+            width: max-content;
+            animation: scroll-x-reverse 20s linear infinite; /* 企业速度已加快：从 30s 改为 20s */
+        }
+
+        .logos-scroll:hover,
+        .logos-scroll-reverse:hover {
+            animation-play-state: paused; /* 悬停时暂停滚动 */
+        }
+
+        @keyframes scroll-x {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); } /* 滚动到一半时重置 */
+        }
+
+        @keyframes scroll-x-reverse {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); } /* 反向滚动 */
+        }
+
+
     </style>
 </head>
 <body class="antialiased">
@@ -168,7 +195,7 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#top" class="text-2xl font-bold text-white inline-flex items-center gap-2 group">
                 <span>拾光</span>
-                <!-- SVG Logo as the Pi symbol --><svg class="w-7 h-7 inline-block animate-logo-glow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Updated SVG Logo with a circular motion theme --><svg class="w-7 h-7 inline-block animate-logo-glow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="logoGradientNav" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#38BDF8"/> <!-- sky-400 --><stop offset="100%" stop-color="#22D3EE"/> <!-- cyan-400 --></linearGradient>
@@ -189,32 +216,30 @@
             </a>
             <div class="hidden md:flex space-x-8 items-center">
                 
-                <!-- 核心功能 (带下拉菜单) -->
-                <div class="relative dropdown-container">
+                <!-- 核心功能 (带下拉菜单) --><div class="relative dropdown-container">
                     <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="features-dropdown">
                         核心功能
                         <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
                     </button>
-                    <!-- 下拉菜单内容 -->
-                    <div id="features-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
-                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">AI 智能匹配任务</a>
-                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">AI 分析企业数据</a>
-                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">安全钱包收益</a>
-                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">技能社区社交</a>
+                    <!-- 下拉菜单内容 --><div id="features-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-56 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">智能任务推送</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">开放任务市场</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">个人技能档案</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">钱包与结算中心</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">企业任务发布台</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">AI 数据分析看板</a>
                     </div>
                 </div>
 
                 <a href="#for-users" class="nav-link text-slate-300 hover:text-sky-400 transition relative">用户收益</a>
                 <a href="#for-biz" class="nav-link text-slate-300 hover:text-sky-400 transition relative">企业赋能</a>
                 
-                <!-- 更多 (带下拉菜单) -->
-                <div class="relative dropdown-container">
+                <!-- 更多 (带下拉菜单) --><div class="relative dropdown-container">
                     <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="more-dropdown">
                         更多
                         <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
                     </button>
-                    <!-- 下拉菜单内容 -->
-                    <div id="more-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
+                    <!-- 下拉菜单内容 --><div id="more-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
                         <a href="#faq" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">常见问题</a>
                         <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">关于我们 </a>
                         <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">你的建议</a>
@@ -230,24 +255,25 @@
         </nav>
         
         <!-- 移动端下拉菜单 --><div id="mobile-menu" class="hidden md:hidden bg-slate-800">
-            <!-- 移动端核心功能 (带下拉) -->
-            <div>
+            <!-- 移动端核心功能 (带下拉) --><div>
                 <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
-                    <span>核心功能</span>
+                    <span>核心优势</span>
                     <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
                 </button>
                 <div class="mobile-dropdown-menu hidden pl-8">
-                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">AI 智能匹配任务</a>
-                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">安全钱包收益</a>
-                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">社交与成长</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">智能任务推送</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">开放任务市场</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">个人技能档案</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">钱包与结算中心</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">企业任务发布台</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">AI 数据分析看板</a>
                 </div>
             </div>
 
             <a href="#for-users" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">用户收益</a>
             <a href="#for-biz" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">企业赋能</a>
 
-            <!-- 移动端更多 (带下拉) -->
-            <div>
+            <!-- 移动端更多 (带下拉) --><div>
                 <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
                     <span>更多</span>
                     <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
@@ -287,7 +313,8 @@
             <div class="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full filter blur-3xl opacity-50"></div>
         </section>
 
-        <!-- 核心功能区域 --><section id="features" class="relative py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+        <!-- === 核心功能区域 (Refocused on Features) === -->
+        <section id="features" class="relative py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
             <!-- 装饰性背景元素 -->
             <div class="absolute inset-0 opacity-30">
                 <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/5 rounded-full filter blur-3xl"></div>
@@ -296,95 +323,96 @@
             
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-20">
-                    <div class="inline-block mb-4">
-                        <span class="text-sm font-semibold text-sky-400 uppercase tracking-wider px-4 py-2 bg-sky-400/10 rounded-full border border-sky-400/20">
-                            Platform Features
-                        </span>
-                    </div>
                     <h2 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-6 fade-in">
                         平台核心功能
                     </h2>
                     <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed fade-in fade-in-1">
-                        我们提供一站式解决方案，精准连接时间供给方与企业需求方
+                        探索拾光π如何运作，将您的碎片时间转化为可见收益与价值
                     </p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     
-                    <!-- 卡片 1: AI智能匹配 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-2 relative overflow-hidden">
+                    <!-- 卡片 1: 智能任务推送 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-2 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400/20 to-sky-600/20 text-sky-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                                <i data-lucide="send" class="w-8 h-8"></i> <!-- Changed Icon -->
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors">AI 智能匹配</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors">智能任务推送</h3>
                             <p class="text-slate-400 leading-relaxed">
-                                强大的 AI 算法，根据您的技能标签、空闲时段、所在位置，自动推送颗粒度最小、最匹配的微任务。
+                                AI引擎根据您的画像与偏好，实时推送最匹配的微任务到您的首页，打开即看，无需筛选。
                             </p>
                         </div>
                     </div>
 
-                    <!-- 卡片 2: 任务市场 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-3 relative overflow-hidden">
+                    <!-- 卡片 2: 开放任务市场 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-3 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 text-emerald-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="briefcase" class="w-8 h-8"></i>
+                                <i data-lucide="store" class="w-8 h-8"></i> <!-- Changed Icon -->
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">双向任务市场</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">开放任务市场</h3>
                             <p class="text-slate-400 leading-relaxed">
-                                用户(C端)可轻松"接收任务"赚取收益；企业(B端)可便捷"发布任务"，快速获取海量真实用户反馈。
+                                提供丰富的任务筛选与搜索功能，用户可自主浏览、选择并承接各类零门槛或技能型微任务。
                             </p>
                         </div>
                     </div>
 
-                    <!-- 卡片 3: 钱包收益 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-4 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative z-10">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 text-amber-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="wallet" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-amber-300 transition-colors">安全钱包收益</h3>
-                            <p class="text-slate-400 leading-relaxed">
-                                每笔任务收益即时到账。透明的账单系统，随时查看您的"钱包收益"，支持多种方式快速提现。
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- 卡片 4: 注册账号 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-5 relative overflow-hidden">
+                    <!-- 卡片 3: 个人技能档案 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-4 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
                             <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-400/20 to-purple-600/20 text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="user-plus" class="w-8 h-8"></i>
+                                <i data-lucide="user-cog" class="w-8 h-8"></i> <!-- Changed Icon -->
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">便捷注册 & 安全认证</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">个人技能档案</h3>
                             <p class="text-slate-400 leading-relaxed">
-                                仅需手机号即可"注册账号"，开启变现之旅。可选的技能认证体系，帮您解锁更高单价的任务。
+                                用户可便捷管理个人资料、添加技能标签、完成技能认证，提升匹配精度与任务接单率。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 4: 钱包与结算中心 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-5 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 text-amber-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="wallet-cards" class="w-8 h-8"></i> 
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-amber-300 transition-colors">钱包与结算中心</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                提供清晰的收支明细、任务酬劳即时到账、多种安全提现通道，保障用户每一分收益。
                             </p>
                         </div>
                     </div>
                     
-                    <!-- 卡片 5: 用户成长 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-6 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <!-- 卡片 5: 企业任务发布台 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400/20 to-rose-600/20 text-rose-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-400/20 to-indigo-600/20 text-indigo-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="clipboard-edit" class="w-8 h-8"></i> <!-- Changed Icon -->
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-rose-300 transition-colors">社交与成长</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors">企业任务发布台</h3>
                             <p class="text-slate-400 leading-relaxed">
-                                独有的技能社区和校园任务圈，在赚钱的同时提升技能、拓展人脉，实现"社交成长"。
+                                企业可通过可视化界面轻松创建、发布、管理微任务，设定目标用户画像与预算，追踪任务进度。
                             </p>
                         </div>
                     </div>
 
-                    <!-- 卡片 6: 企业数据洞察 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-7 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <!-- 卡片 6: AI 数据分析看板 -->
+                    <div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-7 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-400/20 to-indigo-600/20 text-indigo-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="pie-chart" class="w-8 h-8"></i>
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400/20 to-rose-600/20 text-rose-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="area-chart" class="w-8 h-8"></i> <!-- Changed Icon -->
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors">AI企业数据看板</h3>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-rose-300 transition-colors">AI 数据分析看板</h3>
                             <p class="text-slate-400 leading-relaxed">
-                                为B端提供实时的数据洞察看板，任务完成度、用户画像、反馈词云一目了然，助力敏捷决策。
+                                为企业提供实时数据可视化，集成AI分析能力，自动生成用户反馈报告与洞察，赋能快速决策。
                             </p>
                         </div>
                     </div>
@@ -392,6 +420,8 @@
                 </div>
             </div>
         </section>
+        <!-- === 核心功能区域结束 === -->
+
 
         <!-- 让用户收益 --><section id="for-users" class="py-24 bg-slate-800">
             <div class="container mx-auto px-6 text-center">
@@ -479,49 +509,111 @@
             </div>
         </section>
 
-        <!-- 工作原理 --><section id="how-it-works" class="py-24 bg-slate-800">
+        <!-- 合作伙伴 --><section id="partners" class="py-24 bg-slate-800 overflow-hidden">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold text-white mb-4 fade-in">拾光π 工作原理</h2>
-                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-16 fade-in fade-in-1">
-                    简单三步，让你的碎片时间转化为价值。
+                <h2 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-6 fade-in">
+                    合作伙伴
+                </h2>
+                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-20 fade-in fade-in-1"> 
+                    携手知名高校与领先企业，共建碎片时间变现生态
                 </p>
-                <div class="relative max-w-4xl mx-auto">
-                    <!-- 步骤指示线 --><div class="absolute hidden md:block inset-x-0 top-1/2 h-0.5 bg-slate-600 -translate-y-1/2"></div>
-                    <div class="absolute hidden md:flex top-1/2 transform -translate-y-1/2 w-full justify-between px-8">
-                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-sky-500/30"></div>
-                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-500/30"></div>
-                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-500/30"></div>
+                
+                <!-- 高校合作 - 滚动效果 -->
+                <div class="mb-20">
+                    <h3 class="text-2xl font-semibold text-sky-400 mb-10 fade-in fade-in-2">合作高校</h3>
+                    <div class="relative py-4 overflow-hidden">
+                        <!-- 左侧渐变遮罩 -->
+                        <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-800 to-transparent z-10 pointer-events-none"></div>
+                        <!-- 右侧渐变遮罩 --><div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-800 to-transparent z-10 pointer-events-none"></div>
+                        
+                        <div class="logos-scroll flex gap-16 items-center"> <!-- 修改：添加了 logos-scroll class --><!-- 第一组 --><div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">浙江大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">北京大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">清华大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">复旦大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">上海交通大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">南京大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">中国科学技术大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">武汉大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">华中科技大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">西安交通大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">哈尔滨工业大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">中山大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">同济大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">四川大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">天津大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">南开大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">厦门大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">山东大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">东南大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">北京航空航天大学</div>
+                            <!-- 第二组（重复以实现无缝滚动） --><div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">浙江大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">北京大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">清华大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">复旦大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">上海交通大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">南京大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">中国科学技术大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">武汉大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">华中科技大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">西安交通大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">哈尔滨工业大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">中山大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">同济大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">四川大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">天津大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">南开大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">厦门大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">山东大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-300 cursor-pointer" style="font-family: 'Noto Serif SC', serif;">东南大学</div>
+                            <div class="flex-shrink-0 text-3xl md:text-4xl font-bold text-white/70 hover:text-sky-400 hover:scale-110 transition-all duration-3D cursor-pointer" style="font-family: 'Noto Serif SC', serif;">北京航空航天大学</div>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- 企业合作 - 滚动效果（反向） --><div>
+                    <h3 class="text-2xl font-semibold text-sky-400 mb-8 fade-in fade-in-2">合作企业</h3>
+                    <div class="relative overflow-hidden"> <!-- 新增 overflow-hidden --><!-- 左侧渐变遮罩 --><div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-800 to-transparent z-10 pointer-events-none"></div>
+                        <!-- 右侧渐变遮罩 --><div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-800 to-transparent z-10 pointer-events-none"></div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8">
-                        <!-- 步骤 1 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-2">
-                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-sky-500/10 text-sky-400 mb-6">
-                                <i data-lucide="user-cog"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-3">1. 注册并完善档案</h3>
-                            <p class="text-slate-300">
-                                创建您的账号，填写技能、兴趣和空闲时间，让AI更懂你。
-                            </p>
+                        <div class="logos-scroll-reverse flex gap-12 items-center"> <!-- 修改：添加了 logos-scroll-reverse class -->
+                            <!-- 第一组 -->
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">华为</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">小米</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">美的</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">比亚迪</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">阿里巴巴</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">腾讯</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">字节跳动</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">京东</div>
+                            <!-- 新增企业 -->
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">美团</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">拼多多</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">科大讯飞</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">米哈游</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">喜茶</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">元气森林</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">深度求索</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">KIMI</div>
+                            
+                            <!-- 第二组（重复以实现无缝滚动） -->
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">华为</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">小米</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">美的</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">比亚迪</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">阿里巴巴</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">腾讯</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">字节跳动</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">京东</div>
+                            <!-- 新增企业 (重复) -->
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">美团</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">拼多多</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">科大讯飞</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">米哈游</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">喜茶</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">元气森林</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">深度求索</div>
+                            <div class="flex-shrink-0 text-4xl md:text-5xl font-bold text-white/80 hover:text-emerald-400 transition-colors duration-300" style="font-family: 'Inter', sans-serif; letter-spacing: -0.02em;">某MCN机构</div>
                         </div>
-                        <!-- 步骤 2 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-3">
-                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 mb-6">
-                                <i data-lucide="handshake"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-3">2. 智能匹配与接单</h3>
-                            <p class="text-slate-300">
-                                AI自动匹配任务，或在市场中自由选择，一键“接收任务”。
-                            </p>
-                        </div>
-                        <!-- 步骤 3 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-4">
-                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 mb-6">
-                                <i data-lucide="trending-up"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-3">3. 完成任务与收益</h3>
-                            <p class="text-slate-300">
-                                轻松完成任务，即刻获得报酬，并持续提升您的等级和影响力。
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -568,17 +660,54 @@
                             </p>
                         </div>
                     </div>
-                    <!-- FAQ Item 4 --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                    <!-- FAQ Item 4  --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
                         <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                            <span class="text-xl font-medium text-white">发布方如何管理任务进度？</span>
+                            <span class="text-xl font-medium text-white">平台的命名渊源？</span>
                             <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
                         </button>
                         <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
                             <p class="p-6 pt-0 text-slate-300 text-base">
-                                企业（B端）用户在“发布任务”后，将获得一个专属的“企业数据看板”。您可以在看板上实时追踪任务的完成进度、已参与用户画像、任务交付质量等。对于需要审核的任务，您可以在后台批量审核或进行抽查，确保数据真实有效。
+                                “拾光”代表“拾起零碎的时光”，我们将通勤、排队、课间等被浪费的碎片时间收集起来，赋予它们新的价值。“π”（Pi）是无限不循环小数，它代表了这些碎片时间的无限可能性和潜力。“拾光π”合在一起，寓意着为用户的无限碎片时间创造无限的价值。
                             </p>
                         </div>
                     </div>
+                    <!-- FAQ Item 5  -->
+                    <div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                            <span class="text-xl font-medium text-white">平台如何保障我的个人隐私和数据安全？</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <p class="p-6 pt-0 text-slate-300 text-base">
+                                我们极其重视您的隐私安全。平台严格遵守相关法律法规，采用银行级别的数据加密技术和严格的访问控制机制。您在完善个人资料（如技能、位置）时，所有数据仅用于AI匹配，不会泄露给任何第三方或任务发布方。任务交付的数据也会进行匿名化处理，确保您的个人信息始终安全。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- === FAQ 搜索框 === -->
+                    <div class="mt-16 text-center fade-in fade-in-3"> <!-- 使用 fade-in-3 来延迟显示 -->
+                        <h3 class="text-xl font-medium text-white mb-4">有更多问题？</h3>
+                        <p class="text-slate-400 mb-6 max-w-lg mx-auto">
+                            您可以直接搜索我们的帮助中心，或向我们的 AI 客服提问。
+                        </p>
+                        <form class="max-w-lg mx-auto">
+                            <div class="relative">
+                                <!-- 搜索图标 (绝对定位在输入框内部) -->
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i data-lucide="search" class="w-5 h-5 text-slate-500"></i>
+                                </div>
+                                <!-- 输入框 -->
+                                <input type="search" 
+                                    placeholder="例如：“平台的技能认证流程？”" 
+                                    class="w-full py-3 px-5 pl-12 rounded-full text-slate-900 placeholder-slate-500 bg-slate-100 focus:outline-none focus:ring-4 focus:ring-sky-500/50 border border-transparent focus:border-sky-500 transition-all">
+                                <!-- 搜索按钮 -->
+                                <button type="submit" 
+                                        class="absolute inset-y-0 right-0 m-1.5 bg-slate-800 hover:bg-slate-700 text-white font-medium py-2 px-6 rounded-full cta-button text-sm">
+                                    搜索
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- === 搜索框结束 === -->
                 </div>
             </div>
         </section>
@@ -592,10 +721,8 @@
                     拾光π——让碎片时间创造无限可能
                 </p>
                 
-                <!-- Updated Registration Form -->
-                <div class="max-w-lg mx-auto fade-in fade-in-2">
-                    <!-- Phone number form -->
-                    <form class="flex flex-col sm:flex-row gap-3">
+                <!-- Updated Registration Form --><div class="max-w-lg mx-auto fade-in fade-in-2">
+                    <!-- Phone number form --><form class="flex flex-col sm:flex-row gap-3">
                         <input type="tel" placeholder="输入您的手机号码" class="flex-grow py-3 px-5 rounded-full text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-white/50" required>
                         <button type-="button" class="bg-slate-700 hover:bg-slate-600 text-white font-medium py-3 px-5 rounded-full w-full sm:w-auto flex-shrink-0 cta-button">
                             获取验证码
@@ -605,22 +732,17 @@
                         注册 / 登录
                     </button>
 
-                    <!-- Divider -->
-                    <div class="flex items-center justify-center my-6">
+                    <!-- Divider --><div class="flex items-center justify-center my-6">
                         <span class="h-px bg-sky-100/30 flex-grow"></span>
                         <span class="px-4 text-sky-100 text-sm">或使用其他方式登录</span>
                         <span class="h-px bg-sky-100/30 flex-grow"></span>
                     </div>
 
-                    <!-- Social Logins -->
-                    <div class="flex justify-center gap-6">
-                        <!-- 微信登录 -->
-                        <button title="微信登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
-                            <!-- Lucide 'message-square' as placeholder for WeChat, colored green -->
-                            <i data-lucide="message-square" class="w-7 h-7 text-green-400"></i>
+                    <!-- Social Logins --><div class="flex justify-center gap-6">
+                        <!-- 微信登录 --><button title="微信登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
+                            <!-- Lucide 'message-square' as placeholder for WeChat, colored green --><i data-lucide="message-square" class="w-7 h-7 text-green-400"></i>
                         </button>
-                         <!-- 邮箱登录 -->
-                         <button title="邮箱登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
+                         <!-- 邮箱登录 --><button title="邮箱登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
                             <i data-lucide="mail" class="w-7 h-7"></i>
                         </button>
                     </div>
@@ -636,16 +758,16 @@
                 <div class="text-center md:text-left">
                     <div class="text-3xl font-bold text-white inline-flex items-center gap-2">
                         <span>拾光</span>
-                        <!-- SVG Logo as the Pi symbol --><svg class="w-8 h-8 inline-block" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Updated SVG Logo with a circular motion theme --><svg class="w-8 h-8 inline-block" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="logoGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#38BDF8"/> <!-- sky-400 --><stop offset="100%" stop-color="#22D3EE"/> <!-- cyan-400 --></linearGradient>
                             </defs>
-                            <circle cx="50" cy="50" r="45" stroke="url(#logoGradientFooter)" stroke-width="6"/>
-                            <path d="M28 35H72" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <!-- Outer ring (time/orbit) --><circle cx="50" cy="50" r="45" stroke="url(#logoGradientFooter)" stroke-width="6"/>
+                            <!-- Inner Pi symbol --><path d="M28 35H72" stroke="white" stroke-width="8" stroke-linecap="round"/>
                             <path d="M35 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
                             <path d="M65 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
-                            <circle cx="45" cy="35" r="5" fill="white"/>
+                            <!-- Small circle on the path for "moment" --><circle cx="45" cy="35" r="5" fill="white"/>
                         </svg>
                     </div>
                     
@@ -660,8 +782,7 @@
                     </p>
                 </div>
                 
-                <!-- Updated Footer Right Side -->
-                <div class="text-center md:text-right">
+                <!-- Updated Footer Right Side --><div class="text-center md:text-right">
                     <div class="mb-4">
                         <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">企业合作联系</h4>
                         <a href="tel:88888888" class="text-xl text-white font-medium hover:text-sky-400 transition-colors">
@@ -669,14 +790,14 @@
                         </a>
                     </div>
                     <div class="flex justify-center md:justify-end space-x-6">
-                        <a href="#" class="text-slate-400 hover:text-white" title="Twitter">
-                            <i data-lucide="twitter"></i>
+                        <a href="#" class="text-slate-400 hover:text-white" title="微信公众号">
+                            <i data-lucide="message-square"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white" title="微博">
+                            <i data-lucide="at-sign"></i>
                         </a>
                         <a href="#" class="text-slate-400 hover:text-white" title="GitHub">
                             <i data-lucide="github"></i>
-                        </a>
-                        <a href="#" class="text-slate-400 hover:text-white" title="LinkedIn">
-                            <i data-lucide="linkedin"></i>
                         </a>
                     </div>
                 </div>
@@ -874,9 +995,6 @@
     </script>
 </body>
 </html>
-
-
-
 
 
 
