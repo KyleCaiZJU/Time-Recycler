@@ -1,8 +1,10 @@
-<!DOCTYPE html>
 <html lang="zh-CN" class="scroll-smooth"> <!-- Added scroll-smooth for smooth scrolling --><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>拾光π - 你的时间就是金钱</title>
+    <title>拾光π - 您的碎片时间变现平台</title>
+    <!-- 浏览器标签页 Logo (Favicon) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2338BDF8'/%3E%3Cpath d='M25 35H75' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M35 35V70' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M65 35V70' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E">
+    
     <!-- 引入Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Google Font 'Inter' --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,10 +276,10 @@
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in fade-in-3">
                     <a href="#register" class="bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-bold py-3 px-8 rounded-full text-lg cta-button">
-                        收集时光 (用户端)
+                        开始收集时光 (用户端)
                     </a>
                     <a href="#register" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-3 px-8 rounded-full text-lg cta-button">
-                        发布任务 (企业端)
+                        开始发布任务 (企业端)
                     </a>
                 </div>
             </div>
@@ -285,73 +287,106 @@
             <div class="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full filter blur-3xl opacity-50"></div>
         </section>
 
-        <!-- 核心功能区域 --><section id="features" class="py-24 bg-slate-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center text-white mb-4 fade-in">平台核心功能</h2>
-                <p class="text-lg text-slate-400 text-center max-w-xl mx-auto mb-16 fade-in fade-in-1">
-                    我们提供一站式解决方案，精准连接时间供给方与企业需求方。
-                </p>
+        <!-- 核心功能区域 --><section id="features" class="relative py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+            <!-- 装饰性背景元素 -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/5 rounded-full filter blur-3xl"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full filter blur-3xl"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-20">
+                    <div class="inline-block mb-4">
+                        <span class="text-sm font-semibold text-sky-400 uppercase tracking-wider px-4 py-2 bg-sky-400/10 rounded-full border border-sky-400/20">
+                            Platform Features
+                        </span>
+                    </div>
+                    <h2 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-6 fade-in">
+                        平台核心功能
+                    </h2>
+                    <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed fade-in fade-in-1">
+                        我们提供一站式解决方案，精准连接时间供给方与企业需求方
+                    </p>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     
-                    <!-- 卡片 1: AI智能匹配 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-2">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-sky-500/10 text-sky-400 mb-6">
-                            <i data-lucide="brain-circuit"></i>
+                    <!-- 卡片 1: AI智能匹配 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-2 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400/20 to-sky-600/20 text-sky-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors">AI 智能匹配</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                强大的 AI 算法，根据您的技能标签、空闲时段、所在位置，自动推送颗粒度最小、最匹配的微任务。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">AI 智能匹配</h3>
-                        <p class="text-slate-300">
-                            强大的 AI 算法，根据您的技能标签、空闲时段、所在位置，自动推送颗粒度最小、最匹配的微任务。
-                        </p>
                     </div>
 
-                    <!-- 卡片 2: 任务市场 (发布/接收) --><div class="feature-card p-8 rounded-2xl fade-in fade-in-3">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 mb-6">
-                            <i data-lucide="briefcase"></i>
+                    <!-- 卡片 2: 任务市场 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-3 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 text-emerald-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="briefcase" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">双向任务市场</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                用户(C端)可轻松"接收任务"赚取收益；企业(B端)可便捷"发布任务"，快速获取海量真实用户反馈。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">双向任务市场</h3>
-                        <p class="text-slate-300">
-                            用户(C端)可轻松“接收任务”赚取收益；企业(B端)可便捷“发布任务”，快速获取海量真实用户反馈。
-                        </p>
                     </div>
 
-                    <!-- 卡片 3: 钱包收益 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-4">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 mb-6">
-                            <i data-lucide="wallet"></i>
+                    <!-- 卡片 3: 钱包收益 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-4 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 text-amber-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="wallet" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-amber-300 transition-colors">安全钱包收益</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                每笔任务收益即时到账。透明的账单系统，随时查看您的"钱包收益"，支持多种方式快速提现。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">安全钱包收益</h3>
-                        <p class="text-slate-300">
-                            每笔任务收益即时到账。透明的账单系统，随时查看您的“钱包收益”，支持多种方式快速提现。
-                        </p>
                     </div>
 
-                    <!-- 卡片 4: 注册账号 (安全体系) --><div class="feature-card p-8 rounded-2xl fade-in fade-in-5">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-purple-500/10 text-purple-400 mb-6">
-                            <i data-lucide="user-plus"></i>
+                    <!-- 卡片 4: 注册账号 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-5 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-400/20 to-purple-600/20 text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="user-plus" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">便捷注册 & 安全认证</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                仅需手机号即可"注册账号"，开启变现之旅。可选的技能认证体系，帮您解锁更高单价的任务。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">便捷注册 & 安全认证</h3>
-                        <p class="text-slate-300">
-                            仅需手机号即可“注册账号”，开启变现之旅。可选的技能认证体系，帮您解锁更高单价的任务。
-                        </p>
                     </div>
                     
-                    <!-- 卡片 5: 用户成长 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-6">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-rose-500/10 text-rose-400 mb-6">
-                            <i data-lucide="bar-chart-3"></i>
+                    <!-- 卡片 5: 用户成长 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400/20 to-rose-600/20 text-rose-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-rose-300 transition-colors">社交与成长</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                独有的技能社区和校园任务圈，在赚钱的同时提升技能、拓展人脉，实现"社交成长"。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">社交与成长</h3>
-                        <p class="text-slate-300">
-                            独有的技能社区和校园任务圈，在赚钱的同时提升技能、拓展人脉，实现“社交成长”。
-                        </p>
                     </div>
 
-                    <!-- 卡片 6: 企业数据洞察 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-7">
-                        <div class="icon-container flex items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 mb-6">
-                            <i data-lucide="pie-chart"></i>
+                    <!-- 卡片 6: 企业数据洞察 --><div class="group feature-card-v2 p-8 rounded-3xl fade-in fade-in-7 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-400/20 to-indigo-600/20 text-indigo-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="pie-chart" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors">AI企业数据看板</h3>
+                            <p class="text-slate-400 leading-relaxed">
+                                为B端提供实时的数据洞察看板，任务完成度、用户画像、反馈词云一目了然，助力敏捷决策。
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">AI企业数据看板</h3>
-                        <p class="text-slate-300">
-                            为B端提供实时的数据洞察看板，任务完成度、用户画像、反馈词云一目了然，助力敏捷决策。
-                        </p>
                     </div>
 
                 </div>
@@ -839,4 +874,10 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
