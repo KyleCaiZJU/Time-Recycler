@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth"> <!-- Added scroll-smooth for smooth scrolling --><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拾光π - 你的时间就是金钱</title>
+    <!-- 引入Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Google Font 'Inter' --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 引入Lucide图标库 --><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        /* 自定义样式 */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A; /* 深蓝灰背景 */
+            color: #E2E8F0; /* 浅灰色文字 */
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 30% 70%, rgba(56, 189, 248, 0.1), transparent 40%),
+                        radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.1), transparent 40%);
+        }
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6); /* 增加一点不透明度，使其更“舒适” */
+            backdrop-filter: blur(8px); /* 稍微降低模糊，使其更柔和 */
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            /* 使用 cubic-bezier 缓动函数，让动画更有“弹性” */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .feature-card:hover {
+            /* 关键改动：同时上浮 (-8px) 并放大 (1.03)，实现“弹出”效果 */
+            transform: translateY(-8px) scale(1.03);
+            border-color: rgba(56, 189, 248, 0.7);
+            /* 增强阴影，使其更有立体感 */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        .icon-container {
+            width: 48px;
+            height: 48px;
+        }
+        /* 简单的淡入动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* 为每个部分设置动画延迟 */
+        .fade-in-1 { animation-delay: 0.2s; }
+        .fade-in-2 { animation-delay: 0.4s; }
+        .fade-in-3 { animation-delay: 0.6s; }
+        .fade-in-4 { animation-delay: 0.8s; }
+        .fade-in-5 { animation-delay: 1s; }
+        .fade-in-6 { animation-delay: 1.2s; }
+
+        /* Logo 呼吸光晕动画 */
+        @keyframes logo-glow {
+            0% { filter: drop-shadow(0 0 2px #38BDF8) brightness(1); }
+            50% { filter: drop-shadow(0 0 8px #38BDF8) brightness(1.2); }
+            100% { filter: drop-shadow(0 0 2px #38BDF8) brightness(1); }
+        }
+        .animate-logo-glow {
+            animation: logo-glow 3s infinite ease-in-out;
+        }
+        /* 导航栏活动链接样式 */
+        .nav-link.active {
+            color: #38BDF8; /* sky-400 */
+            font-weight: 600;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -5px; /* 调整下划线位置 */
+            height: 2px;
+            background-color: #38BDF8;
+            border-radius: 9999px;
+            animation: expandUnderline 0.3s forwards;
+        }
+        @keyframes expandUnderline {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        /* 下拉菜单动画 */
+        .dropdown-menu {
+            animation: fadeInDown 0.3s ease forwards;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 新增：为 "时间变现" 和 "企业赋能" 区域的卡片设计 */
+        .info-card {
+            background: linear-gradient(145deg, #1E293B, #0F172A); /* slate-800 to slate-900 渐变 */
+            border: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 @ 50% */
+            border-radius: 1rem; /* 16px */
+            transition: all 0.3s ease;
+            overflow: hidden; /* 确保内部元素不会溢出圆角 */
+        }
+        
+        .info-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;  /* 稍大一点 */
+            height: 56px;
+            border-radius: 9999px; /* full */
+            margin-bottom: 1rem; /* 16px */
+            /* 使用与图标颜色匹配的辉光 */
+            background: rgba(255, 255, 255, 0.05); /* 浅色背景 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease; /* 为图标辉光添加过渡 */
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px); /* 悬停时上浮更多 */
+            border-color: rgba(56, 189, 248, 0.4); /* 边框辉光 (sky-400 @ 40%) */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 8px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 针对不同图标颜色的辉光 */
+        .info-card:hover .icon-sky {
+             box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); /* sky-400 glow */
+        }
+        .info-card:hover .icon-green {
+             box-shadow: 0 0 15px rgba(74, 222, 128, 0.5); /* green-400 glow */
+        }
+        .info-card:hover .icon-purple {
+             box-shadow: 0 0 15px rgba(192, 132, 252, 0.5); /* purple-400 glow */
+        }
+        .info-card:hover .icon-red {
+             box-shadow: 0 0 15px rgba(248, 113, 113, 0.5); /* red-400 glow */
+        }
+        .info-card:hover .icon-yellow {
+             box-shadow: 0 0 15px rgba(250, 204, 21, 0.5); /* yellow-400 glow */
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 导航栏 --><header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-slate-900/60 backdrop-blur-md border-b border-slate-700/50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#top" class="text-2xl font-bold text-white inline-flex items-center gap-2 group">
+                <span>拾光</span>
+                <!-- SVG Logo as the Pi symbol --><svg class="w-7 h-7 inline-block animate-logo-glow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradientNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#38BDF8"/> <!-- sky-400 --><stop offset="100%" stop-color="#22D3EE"/> <!-- cyan-400 --></linearGradient>
+                        <filter id="glowNav">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Outer ring (time/orbit) --><circle cx="50" cy="50" r="45" stroke="url(#logoGradientNav)" stroke-width="6" filter="url(#glowNav)"/>
+                    <!-- Inner Pi symbol --><path d="M28 35H72" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M35 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M65 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    <!-- Small circle on the path for "moment" --><circle cx="45" cy="35" r="5" fill="white"/>
+                </svg>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                
+                <!-- 核心功能 (带下拉菜单) -->
+                <div class="relative dropdown-container">
+                    <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="features-dropdown">
+                        核心功能
+                        <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
+                    </button>
+                    <!-- 下拉菜单内容 -->
+                    <div id="features-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">AI 智能匹配任务</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">AI 分析企业数据</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">安全钱包收益</a>
+                        <a href="#features" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">技能社区社交</a>
+                    </div>
+                </div>
+
+                <a href="#for-users" class="nav-link text-slate-300 hover:text-sky-400 transition relative">用户收益</a>
+                <a href="#for-biz" class="nav-link text-slate-300 hover:text-sky-400 transition relative">企业赋能</a>
+                
+                <!-- 更多 (带下拉菜单) -->
+                <div class="relative dropdown-container">
+                    <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="more-dropdown">
+                        更多
+                        <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
+                    </button>
+                    <!-- 下拉菜单内容 -->
+                    <div id="more-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
+                        <a href="#faq" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">常见问题</a>
+                        <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">关于我们 </a>
+                        <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">你的建议</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#register" class="hidden md:block bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-5 rounded-full cta-button">
+                立即注册
+            </a>
+            <!-- 移动端菜单按钮 --><button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        
+        <!-- 移动端下拉菜单 --><div id="mobile-menu" class="hidden md:hidden bg-slate-800">
+            <!-- 移动端核心功能 (带下拉) -->
+            <div>
+                <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
+                    <span>核心功能</span>
+                    <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
+                </button>
+                <div class="mobile-dropdown-menu hidden pl-8">
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">AI 智能匹配任务</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">安全钱包收益</a>
+                    <a href="#features" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">社交与成长</a>
+                </div>
+            </div>
+
+            <a href="#for-users" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">用户收益</a>
+            <a href="#for-biz" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">企业赋能</a>
+
+            <!-- 移动端更多 (带下拉) -->
+            <div>
+                <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
+                    <span>更多</span>
+                    <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
+                </button>
+                <div class="mobile-dropdown-menu hidden pl-8">
+                    <a href="#faq" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">常见问题</a>
+                    <a href="#" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">关于我们 </a>
+                    <a href="#" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">你的建议 </a>
+                </div>
+            </div>
+            
+            <a href="#register" class="block px-6 py-4 text-center bg-sky-500 text-white font-medium rounded-b-lg">立即注册</a>
+        </div>
+    </header>
+
+    <!-- 主体内容 --><main class="pt-20">
+
+        <!-- Hero 区域 --><section id="top" class="relative min-h-[80vh] flex items-center justify-center text-center px-6 py-24 overflow-hidden hero-gradient">
+            <div class="z-10">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight fade-in fade-in-1">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">你的时间</span>
+                    就是金钱
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto mb-10 fade-in fade-in-2">
+                    重拾光阴，点亮收益——你的每一分钟都有价值
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in fade-in-3">
+                    <a href="#register" class="bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-bold py-3 px-8 rounded-full text-lg cta-button">
+                        开始赚钱 (用户端)
+                    </a>
+                    <a href="#register" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-3 px-8 rounded-full text-lg cta-button">
+                        发布任务 (企业端)
+                    </a>
+                </div>
+            </div>
+            <!-- 装饰性辉光 --><div class="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-sky-500/10 rounded-full filter blur-3xl opacity-50"></div>
+            <div class="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full filter blur-3xl opacity-50"></div>
+        </section>
+
+        <!-- 核心功能区域 --><section id="features" class="py-24 bg-slate-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-white mb-4 fade-in">平台核心功能</h2>
+                <p class="text-lg text-slate-400 text-center max-w-xl mx-auto mb-16 fade-in fade-in-1">
+                    我们提供一站式解决方案，精准连接时间供给方与企业需求方。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 卡片 1: AI智能匹配 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-2">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-sky-500/10 text-sky-400 mb-6">
+                            <i data-lucide="brain-circuit"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">AI 智能匹配</h3>
+                        <p class="text-slate-300">
+                            强大的 AI 算法，根据您的技能标签、空闲时段、所在位置，自动推送颗粒度最小、最匹配的微任务。
+                        </p>
+                    </div>
+
+                    <!-- 卡片 2: 任务市场 (发布/接收) --><div class="feature-card p-8 rounded-2xl fade-in fade-in-3">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 mb-6">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">双向任务市场</h3>
+                        <p class="text-slate-300">
+                            用户(C端)可轻松“接收任务”赚取收益；企业(B端)可便捷“发布任务”，快速获取海量真实用户反馈。
+                        </p>
+                    </div>
+
+                    <!-- 卡片 3: 钱包收益 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-4">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 mb-6">
+                            <i data-lucide="wallet"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">安全钱包收益</h3>
+                        <p class="text-slate-300">
+                            每笔任务收益即时到账。透明的账单系统，随时查看您的“钱包收益”，支持多种方式快速提现。
+                        </p>
+                    </div>
+
+                    <!-- 卡片 4: 注册账号 (安全体系) --><div class="feature-card p-8 rounded-2xl fade-in fade-in-5">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-purple-500/10 text-purple-400 mb-6">
+                            <i data-lucide="user-plus"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">便捷注册 & 安全认证</h3>
+                        <p class="text-slate-300">
+                            仅需手机号即可“注册账号”，开启变现之旅。可选的技能认证体系，帮您解锁更高单价的任务。
+                        </p>
+                    </div>
+                    
+                    <!-- 卡片 5: 用户成长 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-6">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-rose-500/10 text-rose-400 mb-6">
+                            <i data-lucide="bar-chart-3"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">社交与成长</h3>
+                        <p class="text-slate-300">
+                            独有的技能社区和校园任务圈，在赚钱的同时提升技能、拓展人脉，实现“社交成长”。
+                        </p>
+                    </div>
+
+                    <!-- 卡片 6: 企业数据洞察 --><div class="feature-card p-8 rounded-2xl fade-in fade-in-7">
+                        <div class="icon-container flex items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 mb-6">
+                            <i data-lucide="pie-chart"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">AI企业数据看板</h3>
+                        <p class="text-slate-300">
+                            为B端提供实时的数据洞察看板，任务完成度、用户画像、反馈词云一目了然，助力敏捷决策。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 让用户收益 --><section id="for-users" class="py-24 bg-slate-800">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4 fade-in">用户收益：让碎片时间创造价值</h2>
+                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-16 fade-in fade-in-1">
+                    无论您是学生、兼职工作者，还是希望利用碎片时间赚取额外收入的人群，拾光π都为您准备了丰富的机会。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-2">
+                        <div class="info-card-icon icon-sky transition-shadow duration-300">
+                            <i data-lucide="dollar-sign" class="text-sky-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">轻松赚取额外收入</h3>
+                        <p class="text-slate-400">
+                            参与问卷、数据标注、图片处理、内容撰写等各类微任务，让碎片时间不再白白流逝。
+                        </p>
+                    </div>
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-3">
+                         <div class="info-card-icon icon-green transition-shadow duration-300">
+                            <i data-lucide="graduation-cap" class="text-green-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">提升技能与经验</h3>
+                        <p class="text-slate-400">
+                            通过完成各种任务，学习新技能，积累项目经验，为您的简历添砖加瓦。
+                        </p>
+                    </div>
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-4">
+                         <div class="info-card-icon icon-purple transition-shadow duration-300">
+                            <i data-lucide="users" class="text-purple-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">拓展人脉，加入社区</h3>
+                        <p class="text-slate-400">
+                            结识志同道合的伙伴，参与校园任务圈，共享经验，共同成长。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 为企业赋能 --><section id="for-biz" class="py-24 bg-slate-900">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4 fade-in">企业赋能：高效获取真实用户反馈</h2>
+                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-16 fade-in fade-in-1">
+                    对企业而言，拾光π是一个高效、精准的众包平台，助您快速收集数据、验证产品、提升品牌影响力。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-2">
+                         <div class="info-card-icon icon-sky transition-shadow duration-300">
+                            <i data-lucide="target" class="text-sky-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">精准目标用户触达</h3>
+                        <p class="text-slate-400">
+                            通过AI智能匹配，您的任务可以精准触达目标用户群体，确保反馈的有效性。
+                        </p>
+                    </div>
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-3">
+                         <div class="info-card-icon icon-red transition-shadow duration-300">
+                            <i data-lucide="zap" class="text-red-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">快速高效完成任务</h3>
+                        <p class="text-slate-400">
+                            数百万活跃用户，可在短时间内完成大规模数据收集、问卷调查等任务，加速您的业务进程。
+                        </D>
+                    </div>
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-4">
+                         <div class="info-card-icon icon-yellow transition-shadow duration-300">
+                            <i data-lucide="bar-chart-2" class="text-yellow-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">专业数据分析报告</h3>
+                        <p class="text-slate-400">
+                            通过我们的数据看板，实时追踪任务进度，利用AI大模型获取可视化报告，为决策提供有力支持。
+                        </D>
+                    </div>
+                    <div class="info-card p-6 sm:p-8 fade-in fade-in-5">
+                         <div class="info-card-icon icon-green transition-shadow duration-300">
+                            <i data-lucide="lightbulb" class="text-green-400 w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">提升品牌互动与创新</h3>
+                        <p class="text-slate-400">
+                            通过发布创新任务，与用户深度互动，不仅能获取宝贵反馈，还能提升品牌在年轻群体中的影响力。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作原理 --><section id="how-it-works" class="py-24 bg-slate-800">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4 fade-in">拾光π 工作原理</h2>
+                <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-16 fade-in fade-in-1">
+                    简单三步，让你的碎片时间转化为价值。
+                </p>
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- 步骤指示线 --><div class="absolute hidden md:block inset-x-0 top-1/2 h-0.5 bg-slate-600 -translate-y-1/2"></div>
+                    <div class="absolute hidden md:flex top-1/2 transform -translate-y-1/2 w-full justify-between px-8">
+                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-sky-500/30"></div>
+                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-500/30"></div>
+                        <div class="w-4 h-4 rounded-full bg-sky-500 ring-4 ring-500/30"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8">
+                        <!-- 步骤 1 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-2">
+                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-sky-500/10 text-sky-400 mb-6">
+                                <i data-lucide="user-cog"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">1. 注册并完善档案</h3>
+                            <p class="text-slate-300">
+                                创建您的账号，填写技能、兴趣和空闲时间，让AI更懂你。
+                            </p>
+                        </div>
+                        <!-- 步骤 2 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-3">
+                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 mb-6">
+                                <i data-lucide="handshake"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">2. 智能匹配与接单</h3>
+                            <p class="text-slate-300">
+                                AI自动匹配任务，或在市场中自由选择，一键“接收任务”。
+                            </p>
+                        </div>
+                        <!-- 步骤 3 --><div class="text-center p-6 bg-slate-900 rounded-lg shadow-xl border border-slate-700 fade-in fade-in-4">
+                            <div class="icon-container mx-auto flex items-center justify-center rounded-full bg-amber-500/10 text-amber-400 mb-6">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">3. 完成任务与收益</h3>
+                            <p class="text-slate-300">
+                                轻松完成任务，即刻获得报酬，并持续提升您的等级和影响力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 常见问题解答 (FAQ) --><section id="faq" class="py-24">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h2 class="text-4xl font-bold text-center text-white mb-4 fade-in">常见问题解答</h2>
+                <p class="text-lg text-slate-400 text-center mb-16 fade-in fade-in-1">
+                    快速了解平台使用与功能，轻松开启高效任务之旅。
+                </p>
+                
+                <div class="space-y-4 fade-in fade-in-2">
+                    <!-- FAQ Item 1 --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                            <span class="text-xl font-medium text-white">如何高效找到合适任务？</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <p class="p-6 pt-0 text-slate-300 text-base">
+                                我们的 AI 智能匹配系统会是您的好帮手。您只需在“注册账号”后尽可能完善您的个人资料和技能标签（例如“会PS”、“英语六级”、“校园达人”等），系统就会自动筛选并向您推送最匹配的任务。您也可以在任务市场手动筛选，但我们更推荐您依赖AI推荐来节省时间。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                            <span class="text-xl font-medium text-white">学生如何提升接单成功率？</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <p class="p-6 pt-0 text-slate-300 text-base">
+                                学生的优势在于学习能力强和校园场景。我们建议您：1. 积极参与“校园任务圈”，完成特定任务以建立信誉。 2. 参与“技能社区”，通过完成简单的技能认证来解锁更高权限。 3. 保持良好的任务完成率和好评，这将极大提升您的AI匹配权重。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                            <span class="text-xl font-medium text-white">任务报酬如何结算？</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <p class="p-6 pt-0 text-slate-300 text-base">
+                                平台采用即时结算（T+0）与担保结算两种模式。对于简单的微任务（如投票、问卷），完成后经系统审核通过，报酬将立即存入您的“安全钱包收益”。对于稍复杂的任务（如设计、文案），发布方会先将赏金托管至平台，待您完成并确认后，赏金即刻释放到您的钱包。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 --><div class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                            <span class="text-xl font-medium text-white">发布方如何管理任务进度？</span>
+                            <i data-lucide="chevron-down" class="faq-icon text-slate-400 transition-transform duration-300 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <p class="p-6 pt-0 text-slate-300 text-base">
+                                企业（B端）用户在“发布任务”后，将获得一个专属的“企业数据看板”。您可以在看板上实时追踪任务的完成进度、已参与用户画像、任务交付质量等。对于需要审核的任务，您可以在后台批量审核或进行抽查，确保数据真实有效。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 注册 CTA --><section id="register" class="py-24 bg-gradient-to-r from-sky-600 to-cyan-600">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-extrabold text-white mb-6 fade-in">
+                    欢迎加入我们，让每一分钟都能被看见、被认可。
+                </h2>
+                <p class="text-xl text-sky-100 max-w-xl mx-auto mb-10 fade-in fade-in-1">
+                    拾光π——让碎片时间创造无限可能
+                </p>
+                
+                <!-- Updated Registration Form -->
+                <div class="max-w-lg mx-auto fade-in fade-in-2">
+                    <!-- Phone number form -->
+                    <form class="flex flex-col sm:flex-row gap-3">
+                        <input type="tel" placeholder="输入您的手机号码" class="flex-grow py-3 px-5 rounded-full text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-white/50" required>
+                        <button type-="button" class="bg-slate-700 hover:bg-slate-600 text-white font-medium py-3 px-5 rounded-full w-full sm:w-auto flex-shrink-0 cta-button">
+                            获取验证码
+                        </button>
+                    </form>
+                    <button type="submit" class="mt-3 w-full bg-slate-900 hover:bg-black text-white font-bold py-3 px-8 rounded-full text-lg cta-button">
+                        注册 / 登录
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="flex items-center justify-center my-6">
+                        <span class="h-px bg-sky-100/30 flex-grow"></span>
+                        <span class="px-4 text-sky-100 text-sm">或使用其他方式登录</span>
+                        <span class="h-px bg-sky-100/30 flex-grow"></span>
+                    </div>
+
+                    <!-- Social Logins -->
+                    <div class="flex justify-center gap-6">
+                        <!-- 微信登录 -->
+                        <button title="微信登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
+                            <!-- Lucide 'message-square' as placeholder for WeChat, colored green -->
+                            <i data-lucide="message-square" class="w-7 h-7 text-green-400"></i>
+                        </button>
+                         <!-- 邮箱登录 -->
+                         <button title="邮箱登录" class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all cta-button">
+                            <i data-lucide="mail" class="w-7 h-7"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 页脚 --><footer class="py-16 bg-slate-900 border-t border-slate-700/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <div class="text-3xl font-bold text-white inline-flex items-center gap-2">
+                        <span>拾光</span>
+                        <!-- SVG Logo as the Pi symbol --><svg class="w-8 h-8 inline-block" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logoGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#38BDF8"/> <!-- sky-400 --><stop offset="100%" stop-color="#22D3EE"/> <!-- cyan-400 --></linearGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="45" stroke="url(#logoGradientFooter)" stroke-width="6"/>
+                            <path d="M28 35H72" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M35 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M65 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <circle cx="45" cy="35" r="5" fill="white"/>
+                        </svg>
+                    </div>
+                    
+                    <p class="text-slate-400 mt-2 inline-flex items-center gap-1.5">
+                        <span>© 2025 拾光</span>
+                        <!-- Mini logo for copyright --><svg class="w-4 h-4 inline-block" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" stroke="#38BDF8" stroke-width="6"/> <!-- Just sky-400 --><path d="M28 35H72" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M35 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M65 35V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            <circle cx="45" cy="35" r="3" fill="white"/> <!-- Smaller circle --></svg>
+                        <span>(Time Recycler). 保留所有权利。</span>
+                    </p>
+                </div>
+                
+                <!-- Updated Footer Right Side -->
+                <div class="text-center md:text-right">
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">企业合作联系</h4>
+                        <a href="tel:88888888" class="text-xl text-white font-medium hover:text-sky-400 transition-colors">
+                            8888-8888
+                        </a>
+                    </div>
+                    <div class="flex justify-center md:justify-end space-x-6">
+                        <a href="#" class="text-slate-400 hover:text-white" title="Twitter">
+                            <i data-lucide="twitter"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white" title="GitHub">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white" title="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+        <!-- 交互脚本 --><script>
+        // 移动菜单主按钮
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            // 切换图标
+            var icon = this.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons(); // 重新渲染图标
+        });
+
+        // 移动端点击主菜单链接后关闭整个菜单
+        document.querySelectorAll('#mobile-menu > a').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+                document.getElementById('mobile-menu-btn').querySelector('i').setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // 移动端子菜单切换
+        document.querySelectorAll('.mobile-dropdown-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const menu = button.nextElementSibling;
+                const icon = button.querySelector('.dropdown-icon'); // FIX: Query by class
+                menu.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // 桌面端子菜单切换 (点击)
+        document.querySelectorAll('.dropdown-toggle').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止点击事件冒泡到 window
+                const dropdownId = button.getAttribute('data-dropdown');
+                const dropdownMenu = document.getElementById(dropdownId);
+                const icon = button.querySelector('.dropdown-icon'); // FIX: Query by class
+
+                // 关闭其他所有打开的下拉菜单
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu.id !== dropdownId) {
+                        menu.classList.add('hidden');
+                        // 重置其他图标
+                        const otherIcon = document.querySelector(`[data-dropdown="${menu.id}"] .dropdown-icon`); // FIX: Query by class
+                        if (otherIcon) {
+                            otherIcon.classList.remove('rotate-180');
+                        }
+                    }
+                });
+
+                // 切换当前点击的菜单
+                dropdownMenu.classList.toggle('hidden');
+                if (icon) icon.classList.toggle('rotate-180'); // This was the error line
+            });
+        });
+
+        // 点击窗口其他地方关闭桌面端下拉菜单
+        window.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+            document.querySelectorAll('.dropdown-toggle .dropdown-icon').forEach(icon => { // FIX: Query by class
+                icon.classList.remove('rotate-180');
+            });
+        });
+
+        // 导航链接点击平滑滚动 (适配所有链接，包括下拉菜单中的)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                // 如果是 #，则不滚动
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 滚动到目标元素，并考虑固定导航栏的高度
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const offsetPosition = targetElement.offsetTop - navbarHeight - 20; // 额外20px的间距
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+                
+                // 如果是移动端，点击后关闭菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    document.getElementById('mobile-menu-btn').querySelector('i').setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
+
+                // 如果是桌面端，点击后关闭下拉菜单
+                const desktopDropdown = this.closest('.dropdown-menu');
+                if (desktopDropdown) {
+                    desktopDropdown.classList.add('hidden');
+                    // 重置图标
+                    const toggleIcon = document.querySelector(`[data-dropdown="${desktopDropdown.id}"] .dropdown-icon`); // FIX: Query by class
+                    if (toggleIcon) {
+                        toggleIcon.classList.remove('rotate-180');
+                    }
+                }
+            });
+        });
+
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+
+                // Toggle content visibility
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null; // Collapse
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px"; // Expand
+                }
+
+                // Toggle icon rotation
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // 导航栏活跃链接高亮和背景变化
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('main section'); // 获取所有主要内容区域
+
+        const options = {
+            root: null, // 视口
+            rootMargin: '-50% 0px -50% 0px', // 当section的50%在视口中心时触发
+            threshold: 0 // 只需要一点点可见度
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 移除所有活跃状态
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // 为当前交叉的 section 对应的 nav-link 添加活跃状态
+                    // 注意：这里我们只高亮主链接，而不是下拉菜单里的
+                    let targetLink;
+                    if (entry.target.id === 'features') {
+                        targetLink = document.querySelector(`.nav-link[data-dropdown="features-dropdown"]`);
+                    } else if (entry.target.id === 'faq') {
+                         targetLink = document.querySelector(`.nav-link[data-dropdown="more-dropdown"]`);
+                    } else {
+                        targetLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                    }
+
+                    if (targetLink) {
+                        targetLink.classList.add('active');
+                    }
+                }
+            });
+        }, options);
+
+        // 观察所有 section
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // 导航栏滚动背景变化
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // 滚动超过50px
+                navbar.classList.add('bg-slate-900'); // 变为实色
+                navbar.classList.remove('bg-slate-900/60');
+            } else {
+                navbar.classList.remove('bg-slate-900');
+                navbar.classList.add('bg-slate-900/60'); // 半透明
+            }
+        });
+
+    </script>
+    
+    <!-- 初次渲染Lucide图标 --><script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
