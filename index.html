@@ -188,7 +188,7 @@
 
 
     </style>
-
+    
 </head>
 <body class="antialiased">
 
@@ -215,8 +215,7 @@
                     <!-- Small circle on the path for "moment" --><circle cx="45" cy="35" r="5" fill="white"/>
                 </svg>
             </a>
-
-        <div class="hidden md:flex mx-auto space-x-8 items-center">
+            <div class="hidden md:flex space-x-8 items-center">
                 
                 <!-- 核心功能 (带下拉菜单) --><div class="relative dropdown-container">
                     <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="features-dropdown">
@@ -235,45 +234,19 @@
 
                 <a href="#for-users" class="nav-link text-slate-300 hover:text-sky-400 transition relative">用户收益</a>
                 <a href="#for-biz" class="nav-link text-slate-300 hover:text-sky-400 transition relative">企业赋能</a>
-                <a href="#community" class="nav-link text-slate-300 hover:text-sky-400 transition relative">交流社区</a>
-                <a href="#activities" class="nav-link text-slate-300 hover:text-sky-400 transition relative">活动中心</a>
                 
-                <!-- 更多 (带下拉菜单) -->
-                <div class="relative dropdown-container">
+                <!-- 更多 (带下拉菜单) --><div class="relative dropdown-container">
                     <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="more-dropdown">
                         更多
                         <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
                     </button>
-                    <!-- 下拉菜单内容 -->
-                    <div id="more-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
-                         <a href="#partners" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">合作伙伴</a>
+                    <!-- 下拉菜单内容 --><div id="more-dropdown" class="dropdown-menu absolute top-full left-0 mt-3 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
                         <a href="#faq" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">常见问题</a>
                         <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">关于我们 </a>
                         <a href="#" class="dropdown-link block px-4 py-3 text-slate-300 hover:bg-slate-700">联系我们</a>
                     </div>
                 </div>
-
-                <!-- === 下载APP (带下拉菜单) === -->
-                <div class="relative dropdown-container">
-                    <button class="nav-link text-slate-300 hover:text-sky-400 transition relative flex items-center gap-1 dropdown-toggle" data-dropdown="download-dropdown">
-                        下载APP
-                        <i data-lucide="chevron-down" class="dropdown-icon w-4 h-4 transition-transform duration-200"></i>
-                    </button>
-                    <!-- 下拉菜单内容 -->
-                    <div id="download-dropdown" class="dropdown-menu absolute top-full right-0 mt-3 w-40 bg-slate-800 border border-slate-700 rounded-lg shadow-lg hidden z-10">
-                         <a href="#" class="dropdown-link flex items-center gap-2 px-4 py-3 text-slate-300 hover:bg-slate-700">
-                             <i data-lucide="monitor" class="w-4 h-4"></i> Win
-                         </a>
-                         <a href="#" class="dropdown-link flex items-center gap-2 px-4 py-3 text-slate-300 hover:bg-slate-700">
-                             <i data-lucide="apple" class="w-4 h-4"></i> MAC
-                         </a>
-                         <a href="#" class="dropdown-link flex items-center gap-2 px-4 py-3 text-slate-300 hover:bg-slate-700">
-                             <i data-lucide="smartphone" class="w-4 h-4"></i> 移动端
-                         </a>
-                    </div>
-                </div>
-                <!-- === 下载APP 结束 === -->
-
+            </div>
             <a href="#register" class="hidden md:block bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-5 rounded-full cta-button">
                 立即注册
             </a>
@@ -300,42 +273,18 @@
 
             <a href="#for-users" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">用户收益</a>
             <a href="#for-biz" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">企业赋能</a>
-            <a href="#community" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">交流社区</a>
-            <a href="#activities" class="block px-6 py-3 text-slate-300 hover:bg-slate-700">活动中心</a>
 
-            <!-- 移动端更多 (带下拉) -->
-            <div>
+            <!-- 移动端更多 (带下拉) --><div>
                 <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
                     <span>更多</span>
                     <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
                 </button>
                 <div class="mobile-dropdown-menu hidden pl-8">
-                    <a href="#partners" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">合作伙伴</a>
                     <a href="#faq" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">常见问题</a>
                     <a href="#" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">关于我们 </a>
                     <a href="#" class="block px-4 py-2 text-slate-400 hover:bg-slate-700">联系我们 </a>
                 </div>
             </div>
-            
-            <!-- === 移动端下载APP (带下拉) === -->
-            <div>
-                <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-6 py-3 text-slate-300 hover:bg-slate-700">
-                    <span>下载APP</span>
-                    <i data-lucide="chevron-down" class="dropdown-icon w-5 h-5 transition-transform duration-200"></i>
-                </button>
-                <div class="mobile-dropdown-menu hidden pl-8">
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-slate-400 hover:bg-slate-700">
-                        <i data-lucide="monitor" class="w-4 h-4"></i> Win
-                    </a>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-slate-400 hover:bg-slate-700">
-                        <i data-lucide="apple" class="w-4 h-4"></i> MAC
-                    </a>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-slate-400 hover:bg-slate-700">
-                        <i data-lucide="smartphone" class="w-4 h-4"></i> 移动端
-                    </a>
-                </div>
-            </div>
-            <!-- === 下载APP 结束 === -->
             
             <a href="#register" class="block px-6 py-4 text-center bg-sky-500 text-white font-medium rounded-b-lg">立即注册</a>
         </div>
@@ -1047,6 +996,3 @@
     </script>
 </body>
 </html>
-
-
-
